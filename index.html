@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fAIrbury Academy - class will be in session</title>
+<style>
+@font-face { font-family: 'Caveat'; src: url('assets/Caveat-Regular.ttf') format('truetype'); }
+:root { --paper:#FFF9EF; --ink:#1c1a16; --red:#A93226; --gold:#E8A800; --line:#d8cdb4; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--paper); color:var(--ink); font-family:Georgia, serif; line-height:1.65; font-size:17px; }
+.wrap { max-width:960px; margin:0 auto; padding:0 24px; }
+.hanging { text-align:center; padding-top:10px; }
+.ropes { width:120px; height:56px; margin:0 auto; position:relative; }
+.ropes::before, .ropes::after { content:''; position:absolute; top:0; width:3px; height:56px; background:var(--ink); }
+.ropes::before { left:14px; transform:rotate(9deg); transform-origin:top; }
+.ropes::after { right:14px; transform:rotate(-9deg); transform-origin:top; }
+.sign { display:inline-block; background:#f3e8cf; border:3px solid var(--ink); border-radius:6px;
+  padding:10px 34px; transform:rotate(-2deg); box-shadow:3px 4px 0 rgba(28,26,22,0.12); }
+.sign span { font-family:'Caveat', cursive; font-size:38px; color:var(--red); }
+.hero { text-align:center; padding:34px 0 20px; }
+.hero img.clock { width:130px; height:auto; }
+.hero h1 { font-family:'Caveat', cursive; font-size:72px; font-weight:normal; line-height:1.15; margin-top:10px; }
+.hero p.sub { font-size:20px; color:#5c5546; margin-top:16px; max-width:620px; margin-left:auto; margin-right:auto; }
+.hero p.sub b { color:var(--ink); font-weight:normal; }
+.cards { display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; padding:44px 0 10px; }
+.card { background:#fffdf7; border:2px solid var(--line); border-radius:14px; padding:22px 18px 26px;
+  text-align:center; cursor:pointer; transition:transform .15s ease; position:relative; }
+.card:hover { transform:translateY(-4px) rotate(-0.5deg); }
+.card img { width:100%; height:auto; border-radius:8px; }
+.card h3 { font-family:'Caveat', cursive; font-size:36px; font-weight:normal; margin:14px 0 6px; }
+.card p { font-size:15.5px; color:#5c5546; }
+.card .tap { display:inline-block; margin-top:10px; font-family:'Caveat', cursive; font-size:24px; color:var(--red); }
+section.block { padding:56px 0; border-top:2px dashed var(--line); margin-top:40px; }
+h2 { font-family:'Caveat', cursive; font-size:54px; font-weight:normal; text-align:center; margin-bottom:10px; }
+.lede { font-size:18px; color:#5c5546; text-align:center; max-width:640px; margin:0 auto 34px; }
+.notice { max-width:700px; margin:0 auto 28px; background:#fdf3d8; border:2px dashed var(--gold);
+  border-radius:10px; padding:18px 22px; font-size:16px; }
+.notice b { font-weight:bold; }
+form.signup { max-width:700px; margin:0 auto; display:grid; gap:18px; }
+label.q { display:block; font-family:'Caveat', cursive; font-size:28px; margin-bottom:8px; }
+input[type=text], input[type=email], select, textarea {
+  width:100%; font-family:Georgia, serif; font-size:17px; color:var(--ink);
+  background:#fffdf7; border:2px solid var(--line); border-radius:8px; padding:13px 15px; }
+input:focus, select:focus, textarea:focus { outline:none; border-color:var(--gold); }
+.checks { display:grid; gap:10px; }
+.checks label, .radios label { font-family:Georgia, serif; font-size:16px; color:#3d382c;
+  border:2px solid var(--line); border-radius:8px; padding:10px 16px; cursor:pointer;
+  display:flex; align-items:center; gap:10px; background:#fffdf7; }
+.checks input, .radios input { accent-color:var(--red); width:18px; height:18px; flex:0 0 auto; }
+.radios { display:grid; gap:10px; }
+.btn { display:inline-block; font-size:19px; color:#fffdf7; background:var(--red);
+  padding:15px 42px; border-radius:10px; border:none; cursor:pointer; font-family:Georgia, serif; }
+.btn:hover { background:#8c271e; }
+.form-note { font-size:15px; color:#5c5546; text-align:center; max-width:620px; margin:4px auto 0; }
+.demo { max-width:760px; margin:0 auto; text-align:center; }
+.demo img.main { width:100%; height:auto; border-radius:12px; border:2px solid var(--line); }
+.demo img.mark { width:150px; height:auto; margin-bottom:14px; }
+.demo p.cap { font-size:16px; color:#5c5546; margin-top:14px; }
+.demo p.cap + p.cap { margin-top:8px; }
+footer { border-top:2px dashed var(--line); margin-top:56px; padding:30px 0 46px; text-align:center; }
+footer p { font-size:15px; color:#5c5546; }
+footer .made { font-family:'Caveat', cursive; font-size:28px; color:var(--ink); margin-bottom:6px; }
+footer .made b { color:var(--red); font-weight:normal; }
+#wipe { position:fixed; inset:0; background:#0D1319; z-index:50; pointer-events:none;
+  transform:translateY(-101%); transition:transform .6s ease; display:flex; align-items:center; justify-content:center; }
+#wipe.on { transform:translateY(0); }
+#wipe span { font-family:'Caveat', cursive; font-size:54px; color:#FFF6DE; opacity:0; transition:opacity .3s .3s; }
+#wipe.on span { opacity:1; }
+@keyframes ring { 0%,100% { transform:rotate(0); } 20% { transform:rotate(14deg); } 40% { transform:rotate(-12deg); } 60% { transform:rotate(8deg); } 80% { transform:rotate(-6deg); } }
+.shake { animation:ring .6s ease; }
+@media (max-width:720px) {
+  .cards { grid-template-columns:1fr; }
+  .hero h1 { font-size:52px; }
+  h2 { font-size:42px; }
+}
+</style>
+</head>
+<body>
+<div id="wipe"><span>wiping the board clean...</span></div>
+<div class="wrap">
+
+  <div class="hanging">
+    <div class="ropes"></div>
+    <div class="sign"><span>soon here</span></div>
+  </div>
+
+  <div class="hero">
+    <img class="clock" src="assets/clock.png" alt="Hand-drawn clock">
+    <h1>Class will be in session.</h1>
+    <p class="sub">Our full site is still being built. Meanwhile, the free materials are ready below. <b>All it costs is your time.</b></p>
+  </div>
+
+  <div class="cards">
+    <div class="card" id="card-board" role="link" tabindex="0" aria-label="Open the free scams and safety page">
+      <img src="assets/chalkboard.png" alt="fAIrbury.ai chalkboard">
+      <h3>Free materials</h3>
+      <p>Scams and safety, in plain English. The five habits, mail red flags, and what never to type into AI.</p>
+      <span class="tap">click the chalkboard</span>
+    </div>
+    <div class="card" id="card-bell" role="link" tabindex="0" aria-label="Ring the bell to join the mailing list">
+      <img src="assets/bell-badge.png" alt="fAIrbury Academy bell badge">
+      <h3>Ring the bell</h3>
+      <p>Answer a few questions and join the mailing list. You pick the topics and how many emails you get.</p>
+      <span class="tap">click the bell</span>
+    </div>
+    <div class="card" id="card-school" role="link" tabindex="0" aria-label="Peek into the classroom demos">
+      <img src="assets/schoolhouse.png" alt="fAIrbury Academy schoolhouse">
+      <h3>Peek into the classroom</h3>
+      <p>Demo reels of class in session: a teacher at the board, walking the room, one-on-one help.</p>
+      <span class="tap">click the schoolhouse</span>
+    </div>
+  </div>
+
+  <section class="block" id="signup">
+    <h2>Ring the bell</h2>
+    <p class="lede">Tell us what you want to learn and how often you want to hear from us. The bell means email, the way a school bell means class.</p>
+    <div class="notice">
+      <b>You're signing up for the fAIrbury Academy mailing list.</b> We send on a schedule we set, planned at about once a week. You pick how many emails below: we stop at your number, or when you tell us to stop, whichever comes first. Texts go out only for urgent info, and only if you choose text. Leave any time by replying stop.
+    </div>
+    <form class="signup" id="signup-form">
+      <div>
+        <label class="q" for="s-name">Your name</label>
+        <input type="text" id="s-name" autocomplete="name" required>
+      </div>
+      <div>
+        <label class="q" for="s-email">Email</label>
+        <input type="email" id="s-email" autocomplete="email" required>
+      </div>
+      <div>
+        <label class="q" for="s-phone">Phone <span style="font-size:20px; color:#5c5546;">(only needed if you pick text below)</span></label>
+        <input type="text" id="s-phone" autocomplete="tel">
+      </div>
+      <div>
+        <span class="q">What do you want to learn about?</span>
+        <div class="checks">
+          <label><input type="checkbox" name="topics" value="Spotting scams and staying safe"> Spotting scams and staying safe</label>
+          <label><input type="checkbox" name="topics" value="AI basics for everyday life"> AI basics for everyday life</label>
+          <label><input type="checkbox" name="topics" value="Making flyers and paperwork easier"> Making flyers and paperwork easier</label>
+          <label><input type="checkbox" name="topics" value="Help for my small business"> Help for my small business</label>
+          <label><input type="checkbox" name="topics" value="Just tell me when free classes start"> Just tell me when free classes start</label>
+        </div>
+      </div>
+      <div>
+        <span class="q">How should we reach you?</span>
+        <div class="radios">
+          <label><input type="radio" name="channel" value="Email (preferred)" checked> Email - our preference. Regular updates live here.</label>
+          <label><input type="radio" name="channel" value="Text, but only for urgent info"> Text, but only for urgent info. Texts feel invasive, so we save them for things that can't wait.</label>
+        </div>
+      </div>
+      <div>
+        <span class="q">How many emails should we send?</span>
+        <div class="radios">
+          <label><input type="radio" name="count" value="Just one" checked> Just one</label>
+          <label><input type="radio" name="count" value="Two"> Two</label>
+          <label><input type="radio" name="count" value="Five"> Five</label>
+          <label><input type="radio" name="count" value="Ten"> Ten</label>
+          <label><input type="radio" name="count" value="Keep them coming until I say stop"> Keep them coming until I say stop</label>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:6px;">
+        <button type="submit" class="btn">Ring the bell - sign me up</button>
+      </div>
+      <p class="form-note">For now, Nico reads every signup himself and sends the emails by hand. This page does not save anything you type. Once you press send, your email provider handles it like any other email, and may keep a copy on their side.</p>
+    </form>
+  </section>
+
+  <section class="block" id="classroom">
+    <h2>Peek into the classroom</h2>
+    <p class="lede">Demo reels of class in session. First one is ready; more are being made.</p>
+    <div class="demo">
+      <img class="mark" src="assets/schoolhouse.png" alt="fAIrbury Academy schoolhouse">
+      <img class="main" src="assets/teacher-demo-1.png" alt="Anime-style demo: a teacher at the chalkboard asking What is AI?">
+      <p class="cap"><b>Demo 1:</b> a teacher at the board - "What is AI?"</p>
+      <p class="cap">Still being made: the teacher walking the room, one-on-one help at a desk. Free classes are planned at the Fairbury Public Library. Dates are coming.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="made">Made by f<b>AI</b>rbury.ai</p>
+    <p>fAIrbury Academy - learn AI with your neighbors.</p>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var wipe = document.getElementById('wipe');
+  var board = document.getElementById('card-board');
+  function goBoard() {
+    wipe.classList.add('on');
+    setTimeout(function () { window.location.href = 'safety/'; }, 750);
+  }
+  board.addEventListener('click', goBoard);
+  board.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goBoard(); } });
+
+  var bell = document.getElementById('card-bell');
+  function goBell() {
+    var img = bell.querySelector('img');
+    img.classList.remove('shake');
+    void img.offsetWidth;
+    img.classList.add('shake');
+    document.getElementById('signup').scrollIntoView({ behavior: 'smooth' });
+  }
+  bell.addEventListener('click', goBell);
+  bell.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goBell(); } });
+
+  var school = document.getElementById('card-school');
+  function goSchool() {
+    document.getElementById('classroom').scrollIntoView({ behavior: 'smooth' });
+  }
+  school.addEventListener('click', goSchool);
+  school.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goSchool(); } });
+
+  var form = document.getElementById('signup-form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('s-name').value.trim();
+    var email = document.getElementById('s-email').value.trim();
+    var phone = document.getElementById('s-phone').value.trim();
+    if (!name || !email) { (!name ? document.getElementById('s-name') : document.getElementById('s-email')).focus(); return; }
+    var topics = [];
+    form.querySelectorAll('input[name="topics"]:checked').forEach(function (c) { topics.push(c.value); });
+    var channel = form.querySelector('input[name="channel"]:checked').value;
+    var count = form.querySelector('input[name="count"]:checked').value;
+    var lines = [
+      'MAILING LIST SIGNUP - fAIrbury Academy',
+      '',
+      'Name: ' + name,
+      'Email: ' + email,
+      'Phone: ' + (phone || 'not given'),
+      'Wants to learn about: ' + (topics.length ? topics.join('; ') : 'nothing selected'),
+      'Reach them by: ' + channel,
+      'Number of emails: ' + count,
+      '',
+      'They confirmed the signup notice on the page.'
+    ];
+    window.location.href = 'mailto:fairburyai@gmail.com'
+      + '?subject=' + encodeURIComponent('Mailing list signup - fAIrbury Academy')
+      + '&body=' + encodeURIComponent(lines.join('\n'));
+  });
+})();
+</script>
+</body>
+</html>

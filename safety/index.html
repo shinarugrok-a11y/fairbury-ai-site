@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scams and Safety - fAIrbury Academy</title>
+<style>
+@font-face { font-family: 'Caveat'; src: url('Caveat-Regular.ttf') format('truetype'); }
+:root { --board:#0D1319; --cream:#FFF6DE; --gold:#FFC800; --muted:#b8ab90; --line:#3a4350; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--board); color:var(--cream); font-family:Georgia, serif; line-height:1.65; font-size:17px; }
+body::before { content:''; position:fixed; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse at 50% 30%, rgba(255,246,222,0.045), transparent 65%); }
+.wrap { max-width:920px; margin:0 auto; padding:0 24px; position:relative; }
+nav { display:flex; justify-content:space-between; align-items:center; padding:28px 0; border-bottom:2px solid var(--line); }
+.brand { font-family:'Caveat', cursive; font-size:34px; color:var(--cream); }
+.brand b { color:var(--gold); font-weight:normal; }
+.nav-cta { font-size:16px; color:var(--board); background:var(--gold);
+  padding:10px 22px; border-radius:6px; text-decoration:none; }
+.nav-cta:hover { background:var(--cream); }
+.hero { text-align:center; padding:72px 0 56px; }
+.hero h1 { font-family:'Caveat', cursive; font-size:76px; font-weight:normal; line-height:1.15; }
+.hero h1 .gold { color:var(--gold); }
+.hero p.sub { font-size:21px; color:var(--muted); margin-top:22px; max-width:640px; margin-left:auto; margin-right:auto; line-height:1.6; }
+.hero .class-note { display:inline-block; margin-top:26px; font-size:15px; color:var(--muted);
+  border:1px dashed var(--line); border-radius:8px; padding:10px 18px; }
+section { padding:52px 0; border-top:2px solid var(--line); }
+h2 { font-family:'Caveat', cursive; font-size:52px; font-weight:normal; text-align:center; margin-bottom:12px; }
+h2 .gold { color:var(--gold); }
+.lede { font-size:18px; color:var(--muted); text-align:center; max-width:620px; margin:0 auto 36px; line-height:1.65; }
+.habits { display:grid; gap:16px; }
+.habit { border:2px solid var(--line); border-radius:12px; padding:26px 26px; background:rgba(255,246,222,0.02); }
+.habit .row { display:flex; gap:18px; align-items:baseline; }
+.habit .n { font-family:'Caveat', cursive; font-size:44px; color:var(--gold); flex:0 0 auto; }
+.habit h3 { font-family:'Caveat', cursive; font-size:36px; font-weight:normal; }
+.habit p { font-size:16.5px; color:var(--muted); margin-top:8px; line-height:1.65; }
+.checks { list-style:none; max-width:700px; margin:0 auto; display:grid; gap:14px; }
+.checks li { border:2px solid var(--line); border-radius:10px; padding:18px 22px 18px 58px; position:relative; font-size:17px; }
+.checks li::before { content:'✕'; position:absolute; left:20px; top:16px; font-family:'Caveat', cursive;
+  font-size:30px; color:var(--gold); }
+.checks li b { color:var(--cream); font-weight:normal; }
+.checks li span { color:var(--muted); }
+.closer { text-align:center; max-width:640px; margin:26px auto 0; font-size:19px; color:var(--cream); }
+.closer .gold { color:var(--gold); font-family:'Caveat', cursive; font-size:30px; }
+details { border:2px solid var(--line); border-radius:10px; margin:0 auto 12px; max-width:700px; background:rgba(255,246,222,0.02); }
+summary { cursor:pointer; padding:18px 22px; font-family:'Caveat', cursive; font-size:28px; list-style:none; }
+summary::-webkit-details-marker { display:none; }
+summary::after { content:' +'; color:var(--gold); }
+details[open] summary::after { content:' -'; }
+details p { padding:0 22px 20px; font-size:16.5px; color:var(--muted); }
+details a { color:var(--gold); }
+form.intake { max-width:700px; margin:0 auto; display:grid; gap:16px; }
+label { display:block; font-family:'Caveat', cursive; font-size:26px; color:var(--cream); margin-bottom:6px; }
+input[type=text], input[type=email], select, textarea {
+  width:100%; font-family:Georgia, serif; font-size:17px; color:var(--cream);
+  background:#131b23; border:2px solid var(--line); border-radius:8px; padding:13px 15px; }
+textarea { min-height:110px; resize:vertical; }
+input:focus, select:focus, textarea:focus { outline:none; border-color:var(--gold); }
+select option { background:#131b23; }
+.radio-row { display:flex; gap:10px; flex-wrap:wrap; }
+.radio-row label { font-family:Georgia, serif; font-size:16px; color:var(--muted);
+  border:2px solid var(--line); border-radius:8px; padding:10px 16px; cursor:pointer; margin:0; }
+.radio-row input { accent-color:var(--gold); margin-right:8px; }
+.btn { display:inline-block; font-size:19px; color:var(--board); background:var(--gold);
+  padding:15px 42px; border-radius:8px; border:none; cursor:pointer; font-family:Georgia, serif; }
+.btn:hover { background:var(--cream); }
+.btn-ghost { display:inline-block; font-size:17px; color:var(--cream); background:transparent;
+  padding:13px 30px; border-radius:8px; border:2px solid var(--line); cursor:pointer; font-family:Georgia, serif; }
+.btn-ghost:hover { border-color:var(--gold); }
+.form-note { font-size:15.5px; color:var(--muted); text-align:center; max-width:600px; margin:6px auto 0; }
+.urgent { max-width:700px; margin:0 auto 34px; border:2px solid var(--gold); border-radius:10px; padding:20px 24px; }
+.urgent p { font-size:17px; }
+.urgent b { color:var(--gold); font-weight:normal; font-family:'Caveat', cursive; font-size:26px; }
+.classbox { max-width:700px; margin:0 auto; text-align:center; }
+.classbox p { font-size:19px; line-height:1.75; color:var(--cream); }
+.classbox p + p { margin-top:16px; }
+footer { border-top:2px solid var(--line); padding:34px 0 48px; text-align:center; }
+footer p { font-size:15px; color:var(--muted); }
+footer .made { font-family:'Caveat', cursive; font-size:26px; color:var(--cream); margin-bottom:8px; }
+footer .made b { color:var(--gold); font-weight:normal; }
+@media (max-width:720px) {
+  .hero h1 { font-size:52px; }
+  h2 { font-size:40px; }
+  .brand { font-size:26px; }
+  .habit h3 { font-size:30px; }
+}
+@media print {
+  body::before, nav, .hero .class-note, #intake, .btn-ghost, footer { display:none; }
+  body { font-size:13px; }
+  section { padding:24px 0; page-break-inside:avoid; }
+  .hero { padding:30px 0 20px; }
+  .hero h1 { font-size:44px; }
+  h2 { font-size:32px; }
+  .habit { break-inside:avoid; padding:14px 16px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="brand">f<b>AI</b>rbury Academy</div>
+    <a class="nav-cta" href="#intake">Report something</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Scams have scripts.<br><span class="gold">So should you.</span></h1>
+    <p class="sub">The tricks change every year. The defenses don't. Five habits, in plain English. Free.</p>
+    <div class="class-note">This page is the handout for the free fAIrbury Academy scams and safety session.</div>
+  </div>
+
+  <section id="habits">
+    <h2>The <span class="gold">five habits</span></h2>
+    <p class="lede">Every trick in the book loses to the same few moves. Learn these and you're covered for most of what's out there.</p>
+    <div class="habits">
+      <div class="habit">
+        <div class="row"><div class="n">1</div><h3>Pause. Hang up first. Decide later.</h3></div>
+        <p>The single most useful habit there is. Anyone who pressures you to decide right now is handing you the tell. A real office will still be there tomorrow.</p>
+      </div>
+      <div class="habit">
+        <div class="row"><div class="n">2</div><h3>Judge the request, not the writing.</h3></div>
+        <p>Scam letters and messages look real now. Don't grade the spelling. Ask what they want you to do, and whether a real office would ask for it that way.</p>
+      </div>
+      <div class="habit">
+        <div class="row"><div class="n">3</div><h3>Set a family safe word.</h3></div>
+        <p>Pick one word everyone in your house knows. A real caller in a real emergency knows it. A stranger with a cloned voice doesn't.</p>
+      </div>
+      <div class="habit">
+        <div class="row"><div class="n">4</div><h3>Check the letter yourself.</h3></div>
+        <p>A scam letter hands you their phone number. Ignore it. Look up the office's real number yourself and call that one.</p>
+      </div>
+      <div class="habit">
+        <div class="row"><div class="n">5</div><h3>If you'd shred it, don't type it.</h3></div>
+        <p>Social Security numbers, account and card numbers, passwords, medical details. Chatbots and search boxes can keep what you type. The paper rule works: shred-worthy means don't type it.</p>
+      </div>
+    </div>
+    <div class="closer no-print" style="margin-top:30px;">
+      <button class="btn-ghost" onclick="window.print()">Print the page</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mail <span class="gold">red flags</span></h2>
+    <p class="lede">Paper scams run the same playbook as phone scams. Watch for these four.</p>
+    <ul class="checks">
+      <li><b>A prize you never entered,</b> <span>or a threat about money you don't remember owing.</span></li>
+      <li><b>Payment by gift card, wire transfer, or crypto.</b> <span>Real offices don't take gift cards.</span></li>
+      <li><b>"You have to decide right now."</b> <span>Pressure is the tell, on paper too.</span></li>
+      <li><b>A phone number printed on the letter,</b> <span>with instructions to call it. Look up the real number yourself.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What never goes <span class="gold">into AI or search</span></h2>
+    <p class="lede">Questions are fine. Private facts are not.</p>
+    <ul class="checks">
+      <li><b>Full Social Security number</b></li>
+      <li><b>Bank account numbers, card numbers, PINs and passwords</b></li>
+      <li><b>Medical details,</b> <span>yours or anyone else's</span></li>
+      <li><b>Other people's private information</b></li>
+    </ul>
+    <p class="closer">If you'd shred the paper version, <span class="gold">don't type it.</span></p>
+  </section>
+
+  <section>
+    <h2>If it already <span class="gold">happened</span></h2>
+    <p class="lede">Fast, calm, in this order.</p>
+    <div class="habits">
+      <div class="habit">
+        <div class="row"><div class="n">1</div><h3>Tell someone you trust.</h3></div>
+        <p>Shame keeps people quiet, and scammers count on that. Talking about it protects the next person.</p>
+      </div>
+      <div class="habit">
+        <div class="row"><div class="n">2</div><h3>If money moved, call your bank right now.</h3></div>
+        <p>Use the number on your card, not the number they gave you.</p>
+      </div>
+      <div class="habit">
+        <div class="row"><div class="n">3</div><h3>Report it at ReportFraud.ftc.gov.</h3></div>
+        <p>It takes a few minutes, and it helps investigators see the pattern.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fair <span class="gold">questions</span></h2>
+    <p class="lede">The ones people actually ask.</p>
+    <details>
+      <summary>Will fAIrbury Academy ever ask for my password or account number?</summary>
+      <p>No. We never need it, and we will never ask by phone, text, or email. If someone claiming to be us asks, hang up and tell us through the form below.</p>
+    </details>
+    <details>
+      <summary>Is it safe to use AI at all?</summary>
+      <p>For learning, yes. The rule is one sentence: never type private information into it. Questions are fine. Your Social Security number is not.</p>
+    </details>
+    <details>
+      <summary>I got a scary call. What do I do first?</summary>
+      <p>Hang up. That is step one, and it is enough. Then talk to someone you trust before you do anything else.</p>
+    </details>
+    <details>
+      <summary>Can I bring a suspicious letter to class?</summary>
+      <p>Yes. Bring it to a free session and we will read it together. Do not call the number printed on it first.</p>
+    </details>
+  </section>
+
+  <section id="intake">
+    <h2>Something <span class="gold">fishy?</span> Tell us.</h2>
+    <p class="lede">This goes straight to Nico, not a call center. He reads every message himself.</p>
+    <div class="urgent">
+      <p><b>Already sent money?</b> Call your bank first, right now, on the number printed on your card. Then come back and tell us.</p>
+    </div>
+    <form class="intake" id="report-form">
+      <div>
+        <label for="f-name">Your name</label>
+        <input type="text" id="f-name" name="name" autocomplete="name" required>
+      </div>
+      <div>
+        <label for="f-contact">How can we reach you? (optional)</label>
+        <input type="text" id="f-contact" name="contact" placeholder="Phone or email" autocomplete="email">
+      </div>
+      <div>
+        <label for="f-kind">What happened?</label>
+        <select id="f-kind" name="kind">
+          <option>Phone call</option>
+          <option>Text message</option>
+          <option>Email</option>
+          <option>Letter in the mail</option>
+          <option>Someone came to my door</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-ask">What did they ask you to do?</label>
+        <textarea id="f-ask" name="asked" placeholder="In your own words. What did they say, and what did they want?"></textarea>
+      </div>
+      <div>
+        <label>What would help most?</label>
+        <div class="radio-row">
+          <label><input type="radio" name="help" value="Just reporting it" checked>Just reporting it</label>
+          <label><input type="radio" name="help" value="I want advice on this one">I want advice on this one</label>
+          <label><input type="radio" name="help" value="Tell me about the free class">Tell me about the free class</label>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:8px;">
+        <button type="submit" class="btn">Send it to Nico</button>
+      </div>
+      <p class="form-note">This opens your email app with everything filled in. Note: this page does not save anything you type. Once you press send, your email provider handles it like any other email, and may keep a copy on their side.</p>
+    </form>
+  </section>
+
+  <section>
+    <h2>Free <span class="gold">class</span></h2>
+    <div class="classbox">
+      <p>fAIrbury Academy teaches scams and safety free at the Fairbury Public Library on Saturdays. Dates are coming.</p>
+      <p>This page stays useful whether or not you can make it. Print the five habits and put them on the fridge.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p class="made">Made by f<b>AI</b>rbury.ai</p>
+    <p>fAIrbury Academy - learn AI with your neighbors.</p>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var form = document.getElementById('report-form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('f-name').value.trim();
+    var contact = document.getElementById('f-contact').value.trim();
+    var kind = document.getElementById('f-kind').value;
+    var asked = document.getElementById('f-ask').value.trim();
+    var help = form.querySelector('input[name="help"]:checked').value;
+    if (!name) {
+      document.getElementById('f-name').focus();
+      return;
+    }
+    var lines = [
+      'Name: ' + name,
+      'Reach me at: ' + (contact || 'not given'),
+      'What happened: ' + kind,
+      'What they asked me to do:',
+      asked || '(left blank)',
+      '',
+      'What would help most: ' + help
+    ];
+    var subject = 'Scam report / safety question - fAIrbury';
+    var url = 'mailto:fairburyai@gmail.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(lines.join('\n'));
+    window.location.href = url;
+  });
+})();
+</script>
+</body>
+</html>
